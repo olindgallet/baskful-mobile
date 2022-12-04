@@ -2,9 +2,10 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="assets/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="../assets/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="../assets/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
   <!-- Add this androidjs.js file to your html file to get the functionality of android js -->
   <script type="text/javascript" src = "../assets/androidjs.js"></script>
   <script type="text/javascript" src = "../assets/bootstrap.min.js"></script>
@@ -15,11 +16,12 @@
     <div class="row">
       
       <div class="col">
-        Product Image:
+        <label for="product-image">Product Image:</label>
       </div>
 
       <div class="col">
-        <input type="file" name="file" accept="image/*" capture="camera" />
+        <video id="product-image" autoplay></video>
+        <img id="product-preview" style="display:none;" autoplay></img>
       </div>
 
     </div>
@@ -49,10 +51,25 @@
     <div class="row">
 
       <div class="col">
-        <button type="button">Process Item!</button>
+        <button style="display:none;" id="process-product" type="button">Process Item!</button>
       </div>
 
     </div>
   </div>
 </body>  
 </html>
+
+<script>
+  window.onload = function(){
+      app.camera.init(document.getElementById("product-image"), {video:true, audio: false});
+  }
+
+  document.getElementById("product-image").onclick = function(){
+    app.camera.takePhoto(document.getElementById("product-image"), document.getElementById("product-preview"));
+    //app.camera.savePhoto('/storage/emulated/0/', 'test.png');
+    //app.camera.savePhoto('/storage/emulated/0/', 'test.webp');
+    document.getElementById("product-image").style.display = "none"
+    document.getElementById("process-product").style.display = "block"
+    document.getElementById("product-preview").style.display = "block"
+  }
+</script>
