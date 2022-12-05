@@ -61,15 +61,30 @@
 
 <script>
   window.onload = function(){
-      app.camera.init(document.getElementById("product-image"), {video:true, audio: false});
+    app.camera.getDevices(function(devices){
+      webcam = devices[1]
+      app.camera.init(document.getElementById("product-image"), {video: {deviceId: {exact: webcam}}, audio: false})
+    })
   }
 
   document.getElementById("product-image").onclick = function(){
-    app.camera.takePhoto(document.getElementById("product-image"), document.getElementById("product-preview"));
-    //app.camera.savePhoto('/storage/emulated/0/', 'test.png');
-    //app.camera.savePhoto('/storage/emulated/0/', 'test.webp');
-    document.getElementById("product-image").style.display = "none"
-    document.getElementById("process-product").style.display = "block"
-    document.getElementById("product-preview").style.display = "block"
+      app.camera.takePhoto(document.getElementById("product-image"), document.getElementById("product-preview"));
+      document.getElementById("product-image").style.display = "none"
+      document.getElementById("process-product").style.display = "block"
+      document.getElementById("product-preview").style.display = "block"
   }
+
+  document.getElementById("process-product").onclick = function(){
+    fetch('https://10.0.1.107:5001/process/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic'
+        },
+          body: JSON.stringify({ "id": 78912 })
+        })
+        .then(response => response.json())
+        .then(response => console.log(JSON.stringify(response)))
+      }
 </script>

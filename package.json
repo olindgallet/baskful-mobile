@@ -2,12 +2,12 @@
     "version": "1.0.0",
     "name": "baskful-mobile",
     "app-name": "baskful-mobile",
-    "package-name": "webview",
+    "package-name": "baskful",
     "project-type": "webview",
     "icon": "./assets/icon/icon.png",
     "dist-path": "./dist",
     "permission": [
-        "android.permission.INTERNET","android.permission.READ_EXTERNAL_STORAGE", "android.permission.CAMERA"
+        "android.permission.INTERNET","android.permission.READ_EXTERNAL_STORAGE"
     ],
     "description": "",
     "main": "main.js",
